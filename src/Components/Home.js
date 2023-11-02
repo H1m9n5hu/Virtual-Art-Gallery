@@ -1,50 +1,66 @@
-import React, { useEffect, useState } from "react";
-import axios from "axios";
-import { Link } from "react-router-dom";
-
-import "./Home.css";
-import Logo from "./logo.png";
+import React, { useEffect, useState } from 'react';
+import axios from 'axios';
+import './CSS/Home.css';
+import Logo from './logo.png';
+import { NavLink } from 'react-router-dom';
 
 const Home = () => {
-  const [imageData, setImageData] = useState([]);
-  // const [query, setQuery] = useState('');
-  const apiUrl =
-    "https://pixabay.com/api/?key=40390159-eeebda2279084f6ec1f524ac5&image_type=all";
+    const [imageData, setImageData] = useState([]);
+    const [query, setQuery] = useState('');
+    const apiKey = 'WVTO_mhvsaowVdPJPKUf1BlzuJZ1N8qPS-qLKqpHwGc';
+    const defaultQuery = 'Art'; // Set your default query here
 
-  useEffect(() => {
-    axios(apiUrl).then((response) => setImageData(response.data.hits));
-    console.log(imageData);
-  }, []);
+    useEffect(() => {
+        const initialApiUrl = `https://api.unsplash.com/search/photos?query=${defaultQuery}&per_page=12`;
 
-  return (
-    <>
-      <nav>
-        <div className="navTitle">
-          <img src={Logo} alt="Virtual Art Gallery"></img>
-          <h1>Virtual Art Gallery</h1>
-        </div>
-        <div className="navBtn">
-          {/* <h2>Sign in</h2> */}
-          <Link to="/signin">
-            <h2>Sign in</h2>
-          </Link>
-          <Link to="/signup">
-            <h2>Sign up</h2>
-          </Link>
-          {/* <h2>Sign up</h2> */}
-        </div>
-      </nav>
-      {/* <input type='text' onChange={(e) => setQuery(e.target.value)} value={query} placeholder='Search'></input> */}
-      <div className="imageContent">
-        {imageData.map(
-          (image) =>
-            image.userImageURL !== "" && (
-              <img src={image.userImageURL} alt="Art Gallery"></img>
-            )
-        )}
-      </div>
-    </>
-  );
+        axios(initialApiUrl, {
+            headers: {
+                Authorization: `Client-ID ${apiKey}`,
+            },
+        })
+        .then(response => setImageData(response.data.results));
+    }, [defaultQuery]); // This effect runs when the component mounts and when the default query changes
+
+    const searchBtnHandler = () => {
+        // Set the query to the default query if it's empty
+        const newQuery = query.trim() === '' ? defaultQuery : query;
+        const apiUrl = `https://api.unsplash.com/search/photos?query=${newQuery}&per_page=12`;
+        axios(apiUrl, {
+            headers: {
+                Authorization: `Client-ID ${apiKey}`,
+            },
+        })
+        .then(response => setImageData(response.data.results));
+    }
+
+    const enterPressHandler = (e) => {
+        if (e.key === 'Enter')
+            searchBtnHandler();
+    }
+
+    return (
+        <>
+            <nav>
+                <div className='navTitle'>
+                    <img src={Logo} alt='Virtual Art Gallery'></img>
+                    <h1>Virtual Art Gallery</h1>
+                </div>
+                <div className='navBtn'>
+                    <NavLink className='navLink' to='/login'><h2>Login</h2></NavLink>
+                    <NavLink className='navLink' to='/register'><h2>Register</h2></NavLink>
+                </div>
+            </nav>
+            <div className='searchBar'>
+                <input type='text' className='inputField' onChange={(e) => setQuery(e.target.value)} value={query} onKeyDown={enterPressHandler} placeholder='Search'></input>
+                <button type='button' onClick={searchBtnHandler}><i className="material-icons">search</i></button>
+            </div>
+            <div className='imageContent'>
+                {imageData.length !== 0 ? imageData.map(image =>
+                    <img src={image.urls.small} alt='Art Gallery' key={image.id}></img>
+                ) : <h1 className='errorMsg'>Invalid Input!<br/>Please enter valid input.</h1>}
+            </div>
+        </>
+    )
 };
 
 export default Home;

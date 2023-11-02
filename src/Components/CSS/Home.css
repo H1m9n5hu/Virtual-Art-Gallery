@@ -1,0 +1,102 @@
+nav {
+    background-color: rgba(0,0,0,0.2);
+    color: black;
+    display: flex;
+    justify-content: space-between;
+    padding: 0px 30px;
+    margin: 40px 40px 0 40px;
+    border-radius: 50px;
+}
+
+.navTitle img {
+    width: 60px;
+    height: 60px;
+    margin-top: 7px;
+    border-radius: 50%;
+}
+
+.navBtn h2 {
+    border-radius: 50px;
+    padding: 0px 15px;
+    cursor: pointer;
+}
+
+.navTitle {
+    display: flex;
+    width: 500px;
+    justify-content: space-between;
+}
+
+.navTitle h1 {
+    font-family: 'Cinzel Decorative', serif;
+}
+
+.navBtn {
+    display: flex;
+    width: 250px;
+    justify-content: space-between;
+}
+
+.navBtn h2:hover {
+    border: 2px solid white;
+}
+
+.imageContent {
+    display: flex;
+    flex-direction: row;
+    justify-content:center;
+    gap: 70px 70px;
+    flex-wrap: wrap;
+    margin: 100px 0 50px 0;
+}
+
+.imageContent img {
+    border-radius: 8px;
+    width: 400px;
+    height: 400px;
+}
+
+.searchBar {
+    margin: 80px 0 0 0;
+}
+
+.inputField {
+    width: 500px;
+    padding: 19px 20px 15px 20px;
+    margin: 0 35px 0 0;
+    border: none;
+    border-radius: 8px;
+    background-color: rgb(222, 211, 211);
+    font-weight: bolder;
+    font-size: 20px;
+}
+
+.inputField::placeholder {
+    font-weight: bold;
+    font-size: 20px;
+}
+
+.searchBar button {
+    width: 65px;
+    height: 65px;
+    border: none;
+    border-radius: 8px;
+    background-color: rgb(222, 211, 211);
+    cursor: pointer;
+    padding: 4px 0 0 0;
+    /* margin: 0 0 0 0; */
+}
+
+.searchBar button:hover {
+    border: 2px solid black;
+}
+
+.errorMsg {
+    color: red;
+    font-weight: bolder;
+    font-family: 'Cinzel Decorative', serif;;
+}
+
+.navLink {
+    text-decoration: none;
+}
