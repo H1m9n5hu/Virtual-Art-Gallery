@@ -1,3 +1,15 @@
+// import React from 'react';
+
+// const LoginPage = () => {
+//     return (
+//         <>
+//             <h1>Login Page</h1>
+//         </>
+//     )
+// }
+
+// export default LoginPage;
+
 import * as React from 'react';
 import Avatar from '@mui/material/Avatar';
 import Button from '@mui/material/Button';
