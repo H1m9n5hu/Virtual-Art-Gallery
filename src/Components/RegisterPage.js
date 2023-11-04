@@ -1,15 +1,3 @@
-// import React from 'react';
-
-// const RegisterPage = () => {
-//     return (
-//         <>
-//             <h1>Register Page</h1>
-//         </>
-//     )
-// }
-
-// export default RegisterPage;
-
 import * as React from 'react';
 import Avatar from '@mui/material/Avatar';
 import Button from '@mui/material/Button';
